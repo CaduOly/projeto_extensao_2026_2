@@ -18,7 +18,7 @@ fi
 
 # Locate current directory of the script
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-cd "$DIR"
+cd "$DIR/infra"
 
 echo "🔄 [1/3] Limpando volumes e containers anteriores..."
 if docker compose version &> /dev/null; then
