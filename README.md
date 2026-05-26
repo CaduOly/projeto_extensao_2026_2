@@ -21,9 +21,9 @@ O ecossistema é totalmente conteinerizado e dividido de forma estrita em três 
 /projeto_extensao_2026_2
 ├── app/               # Código do Frontend Angular e Dockerfile
 ├── api/               # Código do Backend NestJS, Schema Prisma e Dockerfile
-├── infra/             # Orquestração (docker-compose.yml e scripts)
-│   ├── docker-compose.yml
-│   └── start.sh       # Script orquestrador principal de execução
+├── infra/             # Orquestração (docker-compose.yml)
+│   └── docker-compose.yml
+├── start.sh           # Script orquestrador principal de execução (Na raiz)
 ├── README.md          # Documentação do projeto (Este arquivo)
 └── TODO.md            # Painel local de controle das atividades concluídas
 ```
@@ -54,7 +54,7 @@ cd /caminho/para/projeto_extensao_2026_2
 ### Passo 2: Executar o Script Orquestrador
 Demos permissão de execução para o script de inicialização inteligente. Basta rodar:
 ```bash
-./infra/start.sh
+./start.sh
 ```
 
 > **O que este script faz automaticamente por você?**

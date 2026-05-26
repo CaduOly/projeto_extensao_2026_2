@@ -46,4 +46,7 @@ Este arquivo serve para acompanhar o progresso do desenvolvimento do projeto de 
 ### 5. Validação e Entrega
 - [x] Validar a compilação do TypeScript no front e back-end.
 - [x] Testar o fluxo completo de publicação de vaga e exibição em tempo real no feed.
+- [x] Depurar e corrigir erros de execução nos containers:
+  - [x] Corrigir parâmetro `disable-host-check` inválido no Angular 19 (`app/Dockerfile`).
+  - [x] Corrigir caminho do módulo de build no NestJS (`dist/main.js` -> `dist/src/main.js` no `api/Dockerfile`).
 - [x] Finalizar o versionamento Git local, realizar os commits finais e criar o Walkthrough de entrega.
