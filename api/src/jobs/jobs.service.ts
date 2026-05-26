@@ -4,7 +4,7 @@ import { CreateJobDto } from './dto/create-job.dto';
 
 @Injectable()
 export class JobsService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
 
   async findAll() {
     return this.prisma.job.findMany({
@@ -21,7 +21,14 @@ export class JobsService {
         description: createJobDto.description,
         salary: createJobDto.salary || null,
         whatsapp: createJobDto.whatsapp,
+        address: createJobDto.address || null,
       },
+    });
+  }
+
+  async delete(id: number) {
+    return this.prisma.job.delete({
+      where: { id },
     });
   }
 }

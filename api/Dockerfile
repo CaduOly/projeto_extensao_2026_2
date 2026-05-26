@@ -21,4 +21,4 @@ RUN npm run build
 EXPOSE 3000
 
 # Run schema synchronization and start the backend server
-CMD [ "sh", "-c", "npx prisma db push && npm run start:prod" ]
+CMD [ "sh", "-c", "npx prisma db push && node dist/main.js" ]

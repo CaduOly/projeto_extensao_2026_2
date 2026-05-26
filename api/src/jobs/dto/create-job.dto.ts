@@ -20,4 +20,9 @@ export class CreateJobDto {
   @IsNotEmpty({ message: 'O número do WhatsApp é obrigatório.' })
   @Length(8, 20, { message: 'O número do WhatsApp deve ter entre 8 e 20 caracteres.' })
   whatsapp: string;
+
+  @IsString()
+  @IsOptional()
+  @Length(0, 255, { message: 'O endereço deve ter no máximo 255 caracteres.' })
+  address?: string;
 }

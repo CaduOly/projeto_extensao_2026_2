@@ -8,6 +8,7 @@ generator client {
 
 datasource db {
   provider = "mysql"
+  url      = env("DATABASE_URL")
 }
 
 model Job {
@@ -16,5 +17,6 @@ model Job {
   description String   @db.Text
   salary      String?  @db.VarChar(50)
   whatsapp    String   @db.VarChar(20)
+  address     String?  @db.VarChar(255)
   createdAt   DateTime @default(now())
 }
