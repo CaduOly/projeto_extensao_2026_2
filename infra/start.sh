@@ -3,9 +3,6 @@
 # Exit on error
 set -e
 
-# Clear display
-clear
-
 echo "================================================================="
 echo "      Iniciando Conecta Emprego Paranoá (Orquestrador)          "
 echo "      Foco em Inclusão Econômica e Empreendedorismo (ODS 8)     "
