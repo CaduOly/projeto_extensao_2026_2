@@ -7,7 +7,7 @@ Este arquivo serve para acompanhar o progresso do desenvolvimento do projeto de 
 - [x] **Fase 2: API Backend (NestJS + Prisma + MySQL)**
 - [x] **Fase 3: Frontend App (Angular + Tailwind CSS)**
 - [x] **Fase 4: Infraestrutura (Docker & Orchestration)**
-- [/] **Fase 5: Verificação e Testes Finais**
+- [x] **Fase 5: Verificação e Testes Finais**
 
 ---
 
@@ -44,6 +44,6 @@ Este arquivo serve para acompanhar o progresso do desenvolvimento do projeto de 
 - [x] Criar scripts de inicialização automática (`start.sh`) que rodam migrations e sobem o ecossistema com um único comando.
 
 ### 5. Validação e Entrega
-- [/] Validar a compilação do TypeScript no front e back-end.
-- [ ] Testar o fluxo completo de publicação de vaga e exibição em tempo real no feed.
-- [ ] Finalizar o versionamento Git local, realizar os commits finais e criar o Walkthrough de entrega.
+- [x] Validar a compilação do TypeScript no front e back-end.
+- [x] Testar o fluxo completo de publicação de vaga e exibição em tempo real no feed.
+- [x] Finalizar o versionamento Git local, realizar os commits finais e criar o Walkthrough de entrega.
