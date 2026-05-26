@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: conecta_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: conecta_db
+      MYSQL_USER: conecta_user
+      MYSQL_PASSWORD: conecta_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - conecta_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-prootpassword"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: ../api
+      dockerfile: Dockerfile
+    container_name: conecta_api
+    restart: always
+    environment:
+      DATABASE_URL: mysql://conecta_user:conecta_password@db:3306/conecta_db
+      PORT: 3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - conecta_network
+
+  app:
+    build:
+      context: ../app
+      dockerfile: Dockerfile
+    container_name: conecta_app
+    restart: always
+    ports:
+      - "4200:4200"
+    depends_on:
+      - api
+    networks:
+      - conecta_network
+
+volumes:
+  mysql_data:
+
+networks:
+  conecta_network:
+    driver: bridge
