@@ -1,0 +1,31 @@
+# Node modules and dependencies
+node_modules/
+**/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Angular build and cache directories
+/app/dist/
+/app/.angular/
+/app/.vscode/
+
+# NestJS build and prisma directories
+/api/dist/
+/api/.vscode/
+/api/.env
+/api/prisma/*.db
+/api/prisma/*.db-journal
+
+# Docker & local database data
+/infra/mysql_data/
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
