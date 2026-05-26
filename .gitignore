@@ -30,3 +30,7 @@ Thumbs.db
 # Logs
 *.log
 logs/
+
+# Project Checklist
+TODO.md
+todo.md
