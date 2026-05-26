@@ -4,5 +4,6 @@ export interface Job {
   description: string;
   salary?: string;
   whatsapp: string;
+  address?: string;
   createdAt?: string;
 }

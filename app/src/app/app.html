@@ -1,88 +1,114 @@
-<div class="min-h-screen bg-slate-50 flex flex-col font-sans text-slate-800">
-  <!-- Top Navigation & Brand Header -->
-  <header class="bg-gradient-to-r from-blue-900 to-indigo-950 text-white shadow-md">
-    <div class="max-w-4xl mx-auto px-4 py-6 sm:px-6">
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div>
-          <div class="flex items-center gap-3">
-            <div class="bg-blue-600 p-2 rounded-lg shadow-inner">
-              <!-- Briefcase SVG Icon -->
-              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-              </svg>
-            </div>
-            <h1 class="text-2xl font-bold tracking-tight">Conecta Emprego Paranoá</h1>
+<div class="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-200 flex flex-col font-sans transition-colors duration-300">
+  
+  <!-- Premium Brand Header -->
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-slate-900/80 border-b border-slate-100 dark:border-slate-800/60 shadow-sm transition-colors duration-300">
+    <div class="max-w-4xl mx-auto px-4 py-4 sm:px-6">
+      <div class="flex items-center justify-between gap-4">
+        
+        <!-- Brand Info -->
+        <div class="flex items-center gap-3">
+          <div class="bg-indigo-600 dark:bg-indigo-500 p-2.5 rounded-xl shadow-md text-white shadow-indigo-600/20 dark:shadow-indigo-500/10 flex items-center justify-center">
+            <!-- Flaticon Briefcase Icon -->
+            <i class="fi fi-rr-briefcase text-xl sm:text-2xl leading-none"></i>
           </div>
-          <p class="text-blue-200 text-xs mt-1 font-medium tracking-wide uppercase">
-            Inclusão Econômica e Empreendedorismo Local • ODS 8
-          </p>
+          <div>
+            <h1 class="text-lg sm:text-xl font-extrabold tracking-tight bg-gradient-to-r from-slate-900 to-indigo-950 dark:from-white dark:to-indigo-200 bg-clip-text text-transparent">
+              Conecta Paranoá
+            </h1>
+            <p class="text-[10px] sm:text-xs text-indigo-600 dark:text-indigo-400 font-bold tracking-wider uppercase">
+              Inclusão Econômica • ODS 8
+            </p>
+          </div>
         </div>
         
-        <!-- Tab Selectors (Mobile-Friendly Pill Tabs) -->
-        <nav class="flex bg-blue-950/50 p-1 rounded-xl border border-blue-800/30">
+        <!-- Controls: Tab Selector & Theme Switcher -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          <nav class="flex bg-slate-100 dark:bg-slate-800/80 p-1 rounded-xl">
+            <button 
+              (click)="setTab('feed')"
+              [class]="activeTab() === 'feed' ? 'bg-white dark:bg-slate-700 text-indigo-600 dark:text-white shadow-sm' : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'"
+              class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200">
+              <i class="fi fi-rr-list-check leading-none text-xs"></i>
+              Vagas
+            </button>
+            <button 
+              (click)="setTab('post')"
+              [class]="activeTab() === 'post' ? 'bg-white dark:bg-slate-700 text-indigo-600 dark:text-white shadow-sm' : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'"
+              class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200">
+              <i class="fi fi-rr-store-alt leading-none text-xs"></i>
+              Sou Comerciante
+            </button>
+            <button 
+              (click)="setTab('admin')"
+              [class]="activeTab() === 'admin' ? 'bg-white dark:bg-slate-700 text-indigo-600 dark:text-white shadow-sm' : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'"
+              class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200">
+              <i class="fi fi-rr-shield-check leading-none text-xs"></i>
+              Painel ADM
+            </button>
+          </nav>
+
+          <!-- Elegant Theme Switcher Button -->
           <button 
-            (click)="setTab('feed')"
-            [class]="activeTab() === 'feed' ? 'bg-blue-600 text-white shadow-sm' : 'text-blue-100 hover:text-white hover:bg-blue-900/30'"
-            class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-            Feed de Vagas
+            (click)="toggleTheme()"
+            class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-200/40 dark:border-slate-700/40 text-slate-700 dark:text-slate-200 transition-all duration-200 shadow-sm flex items-center justify-center"
+            aria-label="Alternar Tema"
+            title="Alternar Tema">
+            @if (isDarkMode()) {
+              <!-- Flaticon Sun Icon -->
+              <i class="fi fi-rr-sun text-amber-400 text-xs sm:text-sm animate-spin-slow leading-none"></i>
+            } @else {
+              <!-- Flaticon Moon Icon -->
+              <i class="fi fi-rr-moon text-indigo-600 text-xs sm:text-sm leading-none"></i>
+            }
           </button>
-          <button 
-            (click)="setTab('post')"
-            [class]="activeTab() === 'post' ? 'bg-blue-600 text-white shadow-sm' : 'text-blue-100 hover:text-white hover:bg-blue-900/30'"
-            class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-            </svg>
-            Sou Comerciante
-          </button>
-        </nav>
+        </div>
+
       </div>
     </div>
   </header>
 
   <!-- Main Content Area -->
-  <main class="flex-grow max-w-4xl mx-auto w-full px-4 py-8 sm:px-6">
+  <main class="flex-grow max-w-4xl mx-auto w-full px-4 py-6 sm:py-8 sm:px-6">
     
     <!-- Success and Error Global Alerts -->
     @if (successMessage()) {
-      <div class="mb-6 bg-emerald-50 border-l-4 border-emerald-500 text-emerald-800 p-4 rounded-r-xl shadow-sm flex items-start gap-3 animate-fade-in">
-        <svg class="w-5 h-5 text-emerald-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-        </svg>
-        <span class="text-sm font-medium">{{ successMessage() }}</span>
+      <div class="mb-6 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-500/20 text-emerald-800 dark:text-emerald-300 p-4 rounded-xl shadow-sm flex items-start gap-3 animate-fade-in">
+        <!-- Flaticon Success Icon -->
+        <i class="fi fi-rr-check-circle text-emerald-500 text-lg shrink-0 mt-0.5"></i>
+        <span class="text-sm font-semibold">{{ successMessage() }}</span>
       </div>
     }
 
     @if (errorMessage()) {
-      <div class="mb-6 bg-rose-50 border-l-4 border-rose-500 text-rose-800 p-4 rounded-r-xl shadow-sm flex items-start gap-3 animate-fade-in">
-        <svg class="w-5 h-5 text-rose-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-        </svg>
-        <span class="text-sm font-medium">{{ errorMessage() }}</span>
+      <div class="mb-6 bg-rose-50 dark:bg-rose-950/40 border border-rose-500/20 text-rose-800 dark:text-rose-300 p-4 rounded-xl shadow-sm flex items-start gap-3 animate-fade-in">
+        <!-- Flaticon Error Icon -->
+        <i class="fi fi-rr-warning text-rose-500 text-lg shrink-0 mt-0.5"></i>
+        <span class="text-sm font-semibold">{{ errorMessage() }}</span>
       </div>
     }
 
     <!-- TAB 1: FEED DE VAGAS -->
     @if (activeTab() === 'feed') {
-      <section>
-        <div class="flex items-center justify-between mb-6">
+      <section class="space-y-6">
+        <!-- Section Info Header -->
+        <div class="flex items-center justify-between gap-4">
           <div>
-            <h2 class="text-xl font-bold text-slate-900">Oportunidades no Paranoá</h2>
-            <p class="text-slate-500 text-sm mt-0.5">Conectando jovens a pequenos comércios e bicos na comunidade.</p>
+            <h2 class="text-xl sm:text-2xl font-black tracking-tight text-slate-900 dark:text-white">
+              Vagas e Oportunidades
+            </h2>
+            <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm">
+              Conectando pequenos comércios do Paranoá a jovens talentos locais.
+            </p>
           </div>
           
           <!-- Quick Refresh Button -->
           <button 
             (click)="loadJobs()" 
-            class="text-blue-600 hover:text-blue-800 p-2 rounded-lg hover:bg-slate-100 transition-colors"
+            class="text-indigo-600 dark:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-800/80 p-2.5 rounded-xl border border-slate-200/30 transition-colors flex items-center justify-center"
             title="Atualizar Vagas"
             [disabled]="isLoadingJobs()">
-            <svg [class.animate-spin]="isLoadingJobs()" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 7.89M9 11l3-3 3 3m-3-3v12"></path>
-            </svg>
+            <!-- Flaticon Refresh Icon -->
+            <i [class.animate-spin]="isLoadingJobs()" class="fi fi-rr-refresh text-indigo-600 dark:text-indigo-400 text-sm"></i>
           </button>
         </div>
 
@@ -90,14 +116,17 @@
         @if (isLoadingJobs() && jobs().length === 0) {
           <div class="space-y-4">
             @for (i of [1, 2, 3]; track i) {
-              <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm animate-pulse space-y-3">
-                <div class="h-5 bg-slate-200 rounded w-1/3"></div>
-                <div class="h-4 bg-slate-200 rounded w-1/4"></div>
-                <div class="space-y-2 pt-2">
-                  <div class="h-3 bg-slate-200 rounded w-full"></div>
-                  <div class="h-3 bg-slate-200 rounded w-5/6"></div>
+              <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-100 dark:border-slate-800/60 shadow-sm animate-pulse space-y-4">
+                <div class="flex items-center justify-between">
+                  <div class="h-6 bg-slate-200 dark:bg-slate-800 rounded w-1/3"></div>
+                  <div class="h-6 bg-slate-200 dark:bg-slate-800 rounded-full w-1/4"></div>
                 </div>
-                <div class="h-10 bg-slate-200 rounded-lg w-full pt-4"></div>
+                <div class="h-3 bg-slate-200 dark:bg-slate-800 rounded w-1/5"></div>
+                <div class="space-y-2 pt-2">
+                  <div class="h-4 bg-slate-200 dark:bg-slate-800 rounded w-full"></div>
+                  <div class="h-4 bg-slate-200 dark:bg-slate-800 rounded w-5/6"></div>
+                </div>
+                <div class="h-10 bg-slate-200 dark:bg-slate-800 rounded-xl w-full pt-4"></div>
               </div>
             }
           </div>
@@ -105,75 +134,80 @@
         
         <!-- Empty State -->
         @else if (jobs().length === 0) {
-          <div class="bg-white rounded-2xl border border-slate-100 p-12 text-center shadow-sm max-w-md mx-auto mt-6">
-            <div class="bg-blue-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0a2 2 0 01-2 2H6a2 2 0 01-2-2m16 0V9a2 2 0 00-2-2H6a2 2 0 00-2 2v4M2 6h20M2 18h20"></path>
-              </svg>
+          <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800/60 p-8 sm:p-12 text-center shadow-sm max-w-md mx-auto mt-8">
+            <div class="bg-indigo-50 dark:bg-indigo-950/40 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-inner">
+              <!-- Flaticon Briefcase Icon -->
+              <i class="fi fi-rr-briefcase text-2xl text-indigo-650 dark:text-indigo-400 leading-none"></i>
             </div>
-            <h3 class="text-lg font-bold text-slate-900">Nenhuma vaga cadastrada</h3>
-            <p class="text-slate-500 text-sm mt-2">
-              Seja o primeiro a divulgar uma vaga de emprego formal ou um "bico" para os jovens do Paranoá!
+            <h3 class="text-lg font-extrabold text-slate-900 dark:text-white">Sem vagas cadastradas</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-sm mt-2 max-w-xs mx-auto">
+              Seja o pioneiro e divulgue uma oportunidade de emprego ou "bico" para impulsionar a nossa comunidade do Paranoá!
             </p>
             <button 
               (click)="setTab('post')" 
-              class="mt-5 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow-sm hover:shadow transition-all duration-200">
-              Cadastrar Oportunidade
+              class="mt-6 inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white text-xs sm:text-sm font-bold px-6 py-3 rounded-xl shadow-md shadow-indigo-600/10 hover:shadow-lg transition-all duration-200">
+              Anunciar Vaga
             </button>
           </div>
         } 
         
         <!-- Job Cards List -->
         @else {
-          <div class="grid gap-6">
+          <div class="grid gap-4 sm:gap-6">
             @for (job of jobs(); track job.id) {
-              <article class="bg-white rounded-xl border border-slate-100 shadow-sm p-6 flex flex-col justify-between hover:shadow-md hover:-translate-y-0.5 transition-all duration-200">
+              <article class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800/60 shadow-sm hover:shadow-md hover:scale-[1.005] hover:border-slate-200 dark:hover:border-slate-700/80 transition-all duration-300 p-5 sm:p-6 flex flex-col justify-between">
                 <div>
-                  <div class="flex items-start justify-between gap-4">
-                    <h3 class="text-lg font-bold text-slate-900 leading-snug">{{ job.title }}</h3>
+                  <!-- Header Title & Salary -->
+                  <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 border-b border-slate-100/60 dark:border-slate-800/60 pb-3">
+                    <div>
+                      <h3 class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white leading-snug tracking-tight">
+                        {{ job.title }}
+                      </h3>
+                      <!-- Date and Location info -->
+                      <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-slate-400 dark:text-slate-500 text-[11px] sm:text-xs mt-1">
+                        <span class="flex items-center gap-1">
+                          <i class="fi fi-rr-calendar text-[11px] sm:text-xs leading-none shrink-0 text-slate-400 dark:text-slate-500"></i>
+                          Publicada em {{ job.createdAt | date:'dd/MM/yyyy' }}
+                        </span>
+                        @if (job.address) {
+                          <span class="flex items-center gap-1 text-slate-550 dark:text-slate-400 font-medium">
+                            <i class="fi fi-rr-marker text-[11px] sm:text-xs leading-none text-indigo-500/80 dark:text-indigo-400/80 shrink-0"></i>
+                            {{ job.address }}
+                          </span>
+                        }
+                      </div>
+                    </div>
                     
-                    <!-- Salary badge -->
+                    <!-- Salary details -->
                     <span 
-                      [class]="job.salary ? 'bg-emerald-50 text-emerald-700 border-emerald-100' : 'bg-slate-50 text-slate-600 border-slate-100'"
-                      class="text-xs font-semibold px-2.5 py-1 rounded-full border shrink-0">
+                      [class]="job.salary ? 'bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-400 border-emerald-100 dark:border-emerald-900/30' : 'bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-100 dark:border-slate-700/40'"
+                      class="text-xs font-bold px-3 py-1.5 rounded-xl border self-start">
                       {{ job.salary ? job.salary : 'A combinar' }}
                     </span>
                   </div>
 
-                  <!-- Date badge -->
-                  <div class="flex items-center gap-1.5 text-slate-400 text-xs mt-1.5 mb-4">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                    </svg>
-                    Publicada em {{ job.createdAt | date:'dd/MM/yyyy' }}
-                  </div>
-
                   <!-- Description -->
-                  <p class="text-slate-600 text-sm whitespace-pre-line leading-relaxed border-t border-slate-50 pt-4">
+                  <p class="text-slate-600 dark:text-slate-300 text-xs sm:text-sm whitespace-pre-line leading-relaxed py-4">
                     {{ job.description }}
                   </p>
                 </div>
 
-                <!-- Call to action: WhatsApp redirect -->
-                <div class="mt-6 pt-4 border-t border-slate-50 flex items-center justify-between gap-4 flex-wrap">
-                  <div class="flex items-center gap-1.5 text-xs text-slate-500">
-                    <!-- Location pin SVG -->
-                    <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                    </svg>
-                    <span>Vaga no Paranoá</span>
+                <!-- Footer CTAs -->
+                <div class="mt-4 pt-4 border-t border-slate-100/60 dark:border-slate-800/60 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <!-- Community tag -->
+                  <div class="flex items-center gap-1.5 text-xs text-indigo-600 dark:text-indigo-400 font-semibold bg-indigo-50 dark:bg-indigo-950/30 px-3 py-1.5 rounded-lg self-start">
+                    <i class="fi fi-rr-navigation text-[11px] leading-none shrink-0"></i>
+                    <span>Vaga Local Paranoá</span>
                   </div>
 
+                  <!-- WhatsApp Interest CTA -->
                   <a 
                     [href]="getWhatsAppUrl(job.whatsapp, job.title)" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    class="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold px-5 py-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 w-full sm:w-auto">
-                    <!-- WhatsApp SVG Icon -->
-                    <svg class="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.455 5.703 1.458h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path>
-                    </svg>
+                    class="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-500 dark:hover:bg-emerald-600 text-white text-xs sm:text-sm font-extrabold px-5 py-3 rounded-xl shadow-md shadow-emerald-600/10 hover:shadow-lg dark:shadow-none transition-all duration-300 w-full sm:w-auto">
+                    <!-- WhatsApp Icon -->
+                    <i class="fi fi-brands-whatsapp text-sm sm:text-base leading-none shrink-0"></i>
                     Tenho Interesse
                   </a>
                 </div>
@@ -186,17 +220,21 @@
 
     <!-- TAB 2: PAINEL DO COMERCIANTE (POST VAGA) -->
     @if (activeTab() === 'post') {
-      <section class="max-w-xl mx-auto">
-        <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 sm:p-8">
+      <section class="max-w-xl mx-auto animate-fade-in">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800/60 shadow-sm p-6 sm:p-8">
           <div class="mb-6">
-            <h2 class="text-xl font-bold text-slate-900">Anunciar Vaga</h2>
-            <p class="text-slate-500 text-sm mt-0.5">Preencha o formulário simples para disponibilizar sua oportunidade.</p>
+            <h2 class="text-xl sm:text-2xl font-black tracking-tight text-slate-900 dark:text-white">
+              Anunciar Vaga
+            </h2>
+            <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm mt-1">
+              Divulgue sua oportunidade e conecte-se com jovens dispostos a trabalhar no Paranoá.
+            </p>
           </div>
 
           <form (submit)="submitJob()" class="space-y-5">
             <!-- Title Field -->
             <div>
-              <label for="title" class="block text-sm font-semibold text-slate-700 mb-1.5">
+              <label for="title" class="block text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
                 Título da Vaga <span class="text-rose-500">*</span>
               </label>
               <input 
@@ -205,16 +243,16 @@
                 [ngModel]="formTitle()" 
                 (ngModelChange)="formTitle.set($event)"
                 name="title" 
-                placeholder="Ex: Ajudante de Cozinha, Entregador, Balconista" 
+                placeholder="Ex: Ajudante de Balcão, Entregador, Auxiliar Geral" 
                 required
-                class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 transition-colors text-sm placeholder-slate-400"
+                class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700/80 bg-slate-50 dark:bg-slate-950 focus:bg-white dark:focus:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-600/20 dark:focus:ring-indigo-400/20 focus:border-indigo-600 dark:focus:border-indigo-400 text-slate-900 dark:text-white transition-all text-xs sm:text-sm placeholder-slate-400 dark:placeholder-slate-600"
               />
             </div>
 
             <!-- Description Field -->
             <div>
-              <label for="description" class="block text-sm font-semibold text-slate-700 mb-1.5">
-                Descrição Curta <span class="text-rose-500">*</span>
+              <label for="description" class="block text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
+                Descrição Detalhada <span class="text-rose-500">*</span>
               </label>
               <textarea 
                 id="description" 
@@ -222,16 +260,16 @@
                 (ngModelChange)="formDescription.set($event)"
                 name="description" 
                 rows="4" 
-                placeholder="Descreva as tarefas da vaga, horários e requisitos básicos..." 
+                placeholder="Descreva as tarefas da vaga, horários e requisitos essenciais para a vaga..." 
                 required
-                class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 transition-colors text-sm placeholder-slate-400"
+                class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700/80 bg-slate-50 dark:bg-slate-950 focus:bg-white dark:focus:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-600/20 dark:focus:ring-indigo-400/20 focus:border-indigo-600 dark:focus:border-indigo-400 text-slate-900 dark:text-white transition-all text-xs sm:text-sm placeholder-slate-400 dark:placeholder-slate-600"
               ></textarea>
             </div>
 
-            <!-- Salary / Value Field -->
+            <!-- Salary Field -->
             <div>
-              <label for="salary" class="block text-sm font-semibold text-slate-700 mb-1.5">
-                Valor / Remuneração <span class="text-slate-400 text-xs font-normal">(Opcional)</span>
+              <label for="salary" class="block text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
+                Valor / Remuneração <span class="text-slate-400 dark:text-slate-500 text-xs font-normal">(Opcional)</span>
               </label>
               <input 
                 type="text" 
@@ -239,18 +277,34 @@
                 [ngModel]="formSalary()" 
                 (ngModelChange)="formSalary.set($event)"
                 name="salary" 
-                placeholder="Ex: R$ 1.500/mês, R$ 80/dia, A combinar" 
-                class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 transition-colors text-sm placeholder-slate-400"
+                placeholder="Ex: R$ 80/dia, R$ 1.500/mês, A combinar" 
+                class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700/80 bg-slate-50 dark:bg-slate-950 focus:bg-white dark:focus:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-600/20 dark:focus:ring-indigo-400/20 focus:border-indigo-600 dark:focus:border-indigo-400 text-slate-900 dark:text-white transition-all text-xs sm:text-sm placeholder-slate-400 dark:placeholder-slate-600"
+              />
+            </div>
+
+            <!-- Address Field -->
+            <div>
+              <label for="address" class="block text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
+                Endereço / Localização <span class="text-slate-400 dark:text-slate-500 text-xs font-normal">(Opcional)</span>
+              </label>
+              <input 
+                type="text" 
+                id="address" 
+                [ngModel]="formAddress()" 
+                (ngModelChange)="formAddress.set($event)"
+                name="address" 
+                placeholder="Ex: Av. Paranoá, Quadra 12, Conjunto B ou Trabalho Remoto" 
+                class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700/80 bg-slate-50 dark:bg-slate-950 focus:bg-white dark:focus:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-600/20 dark:focus:ring-indigo-400/20 focus:border-indigo-600 dark:focus:border-indigo-400 text-slate-900 dark:text-white transition-all text-xs sm:text-sm placeholder-slate-400 dark:placeholder-slate-600"
               />
             </div>
 
             <!-- WhatsApp Field -->
             <div>
-              <label for="whatsapp" class="block text-sm font-semibold text-slate-700 mb-1.5">
-                Número do WhatsApp <span class="text-rose-500">*</span>
+              <label for="whatsapp" class="block text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
+                WhatsApp para Contato <span class="text-rose-500">*</span>
               </label>
               <div class="relative">
-                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 text-sm font-medium">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 dark:text-slate-600 text-xs sm:text-sm font-bold">
                   +55
                 </div>
                 <input 
@@ -261,53 +315,326 @@
                   name="whatsapp" 
                   placeholder="(61) 99999-9999" 
                   required
-                  class="w-full pl-12 pr-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 transition-colors text-sm placeholder-slate-400"
+                  class="w-full pl-12 pr-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700/80 bg-slate-50 dark:bg-slate-950 focus:bg-white dark:focus:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-600/20 dark:focus:ring-indigo-400/20 focus:border-indigo-600 dark:focus:border-indigo-400 text-slate-900 dark:text-white transition-all text-xs sm:text-sm placeholder-slate-400 dark:placeholder-slate-600"
                 />
               </div>
-              <p class="text-slate-400 text-xs mt-1.5">Número direto com DDD para que os jovens possam entrar em contato com você pelo WhatsApp.</p>
-            </div>
-
-            <!-- Warning Notice -->
-            <div class="bg-blue-50/50 rounded-xl p-4 border border-blue-100 flex items-start gap-2.5">
-              <svg class="w-5 h-5 text-blue-600 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-              <p class="text-blue-800 text-xs leading-relaxed">
-                Ao publicar, sua vaga ficará visível de imediato no **Feed de Vagas** para jovens do Paranoá em busca de oportunidades e bicos.
+              <p class="text-slate-400 dark:text-slate-500 text-[10px] sm:text-xs mt-2">
+                Número direto com DDD para que os jovens possam enviar mensagem no WhatsApp instantaneamente.
               </p>
             </div>
 
-            <!-- Form Action Button -->
+            <!-- Informational Notice -->
+            <div class="bg-indigo-50/50 dark:bg-slate-800/40 rounded-2xl p-4 border border-indigo-100/20 dark:border-slate-800/60 flex items-start gap-3">
+              <i class="fi fi-rr-info text-indigo-600 dark:text-indigo-400 text-lg shrink-0 mt-0.5 leading-none"></i>
+              <p class="text-[11px] sm:text-xs text-indigo-950 dark:text-slate-300 leading-relaxed font-semibold">
+                Ao publicar, sua vaga estará instantaneamente disponível no **Feed de Vagas** para jovens do Paranoá em busca de inserção econômica.
+              </p>
+            </div>
+
+            <!-- Action Button -->
             <button 
               type="submit" 
               [disabled]="isPostingJob()"
-              class="w-full inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow-sm hover:shadow transition-all duration-200 disabled:bg-blue-400">
+              class="w-full inline-flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white font-extrabold py-3.5 rounded-xl shadow-md shadow-indigo-600/10 hover:shadow-lg dark:shadow-none transition-all duration-300 disabled:bg-indigo-400 cursor-pointer">
               
               @if (isPostingJob()) {
-                <!-- Loading Spinner SVG -->
-                <svg class="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
+                <!-- Loader spinner -->
+                <i class="fi fi-rr-spinner animate-spin text-sm sm:text-base leading-none text-white mr-1.5 shrink-0"></i>
                 Publicando vaga...
               } @else {
-                Publicar Vaga
+                Publicar Oportunidade
               }
             </button>
           </form>
         </div>
       </section>
     }
+
+    <!-- TAB 3: ÁREA ADMINISTRATIVA -->
+    @if (activeTab() === 'admin') {
+      <section class="space-y-6 animate-fade-in">
+        
+        <!-- SECURE PASSWORD GATE -->
+        @if (!isAdminAuthenticated()) {
+          <div class="max-w-md mx-auto mt-8">
+            <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800/60 shadow-xl p-6 sm:p-8 relative overflow-hidden">
+              
+              <!-- Decorative background glow -->
+              <div class="absolute -top-10 -right-10 w-32 h-32 bg-indigo-500/10 dark:bg-indigo-500/5 rounded-full blur-2xl"></div>
+              
+              <div class="text-center mb-6 relative">
+                <div class="bg-indigo-50 dark:bg-indigo-950/40 w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-indigo-100/10 shadow-inner">
+                  <!-- Flaticon Shield Lock Icon -->
+                  <i class="fi fi-rr-lock text-2xl text-indigo-600 dark:text-indigo-400"></i>
+                </div>
+                <h2 class="text-xl font-black text-slate-900 dark:text-white">Acesso Restrito</h2>
+                <p class="text-slate-500 dark:text-slate-400 text-xs mt-1.5">
+                  Área destinada exclusivamente à moderação de vagas do projeto.
+                </p>
+              </div>
+
+              <!-- Admin Password Error Alert -->
+              @if (adminError()) {
+                <div class="mb-4 bg-rose-50 dark:bg-rose-950/40 border border-rose-500/20 text-rose-800 dark:text-rose-300 p-3.5 rounded-xl text-xs font-semibold flex items-center gap-2 animate-pulse">
+                  <i class="fi fi-rr-warning text-rose-500 text-sm shrink-0 leading-none"></i>
+                  <span>{{ adminError() }}</span>
+                </div>
+              }
+
+              <!-- Passphrase Form -->
+              <form (submit)="loginAdmin()" class="space-y-4">
+                <div>
+                  <label for="adminPassword" class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">
+                    Senha Mestra de Acesso
+                  </label>
+                  <input 
+                    type="password" 
+                    id="adminPassword" 
+                    [ngModel]="adminPasswordInput()" 
+                    (ngModelChange)="adminPasswordInput.set($event)"
+                    name="adminPassword" 
+                    placeholder="Digite paranoa2026..." 
+                    required
+                    class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700/80 bg-slate-50 dark:bg-slate-950 focus:bg-white dark:focus:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-600/20 dark:focus:ring-indigo-400/20 focus:border-indigo-600 dark:focus:border-indigo-400 text-slate-900 dark:text-white transition-all text-xs sm:text-sm placeholder-slate-400 dark:placeholder-slate-600"
+                  />
+                </div>
+
+                <button 
+                  type="submit" 
+                  class="w-full inline-flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white font-extrabold py-3.5 rounded-xl shadow-md shadow-indigo-600/10 hover:shadow-lg dark:shadow-none transition-all duration-300 cursor-pointer text-xs sm:text-sm">
+                  Desbloquear Painel
+                </button>
+              </form>
+            </div>
+          </div>
+        } 
+        
+        <!-- AUTHENTICATED ADMIN DASHBOARD -->
+        @else {
+          <!-- Dashboard Top Controls -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800/60 pb-5">
+            <div>
+              <h2 class="text-xl sm:text-2xl font-black tracking-tight text-slate-900 dark:text-white">
+                Painel de Moderação ADM
+              </h2>
+              <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm">
+                Gerencie as vagas publicadas e acompanhe estatísticas locais.
+              </p>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button 
+                (click)="loadJobs()" 
+                class="text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 p-2.5 rounded-xl border border-slate-200/30 transition-colors flex items-center justify-center"
+                title="Recarregar dados"
+                [disabled]="isLoadingJobs()">
+                <i [class.animate-spin]="isLoadingJobs()" class="fi fi-rr-refresh text-slate-650 dark:text-slate-300 text-sm"></i>
+              </button>
+
+              <button 
+                (click)="logoutAdmin()" 
+                class="inline-flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold px-4 py-2.5 rounded-xl transition-all border border-slate-200/30">
+                <i class="fi fi-rr-sign-out-alt leading-none text-xs"></i>
+                Encerrar Sessão
+              </button>
+            </div>
+          </div>
+
+          <!-- REAL-TIME ANALYTICS CARDS -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            
+            <!-- Card 1: Total Vagas -->
+            <div class="bg-gradient-to-br from-indigo-50 to-white dark:from-slate-900/60 dark:to-slate-900 p-5 rounded-2xl border border-indigo-100/40 dark:border-indigo-950/20 shadow-sm flex items-center justify-between">
+              <div class="space-y-1">
+                <p class="text-slate-400 dark:text-slate-500 text-[10px] sm:text-xs font-bold uppercase tracking-wider">Total de Vagas</p>
+                <h3 class="text-2xl font-black text-indigo-650 dark:text-indigo-400">{{ totalJobs() }}</h3>
+                <p class="text-[10px] text-slate-500">Vagas cadastradas na plataforma</p>
+              </div>
+              <div class="bg-indigo-100/50 dark:bg-indigo-950/40 p-3 rounded-xl text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
+                <i class="fi fi-rr-briefcase text-2xl leading-none"></i>
+              </div>
+            </div>
+
+            <!-- Card 2: Média Salarial -->
+            <div class="bg-gradient-to-br from-emerald-50 to-white dark:from-slate-900/60 dark:to-slate-900 p-5 rounded-2xl border border-emerald-100/40 dark:border-emerald-950/20 shadow-sm flex items-center justify-between">
+              <div class="space-y-1">
+                <p class="text-slate-400 dark:text-slate-500 text-[10px] sm:text-xs font-bold uppercase tracking-wider">Média Salarial</p>
+                <h3 class="text-2xl font-black text-emerald-650 dark:text-emerald-400">
+                  {{ salaryMetrics().avgSalary > 0 ? 'R$ ' + (salaryMetrics().avgSalary | number:'1.2-2') : 'N/A' }}
+                </h3>
+                <p class="text-[10px] text-slate-500">Média das vagas remuneradas</p>
+              </div>
+              <div class="bg-emerald-100/50 dark:bg-emerald-950/40 p-3 rounded-xl text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+                <i class="fi fi-rr-money-bill-wave text-2xl leading-none"></i>
+              </div>
+            </div>
+
+            <!-- Card 3: % Com Salário Mapeado -->
+            <div class="bg-gradient-to-br from-amber-50 to-white dark:from-slate-900/60 dark:to-slate-900 p-5 rounded-2xl border border-amber-100/40 dark:border-amber-950/20 shadow-sm flex items-center justify-between">
+              <div class="space-y-1">
+                <p class="text-slate-400 dark:text-slate-500 text-[10px] sm:text-xs font-bold uppercase tracking-wider">Remuneração Explícita</p>
+                <h3 class="text-2xl font-black text-amber-650 dark:text-amber-400">
+                  {{ salaryMetrics().percentWithSalary | number:'1.0-0' }}%
+                </h3>
+                <p class="text-[10px] text-slate-500">{{ salaryMetrics().countWithSalary }} vagas com salário informado</p>
+              </div>
+              <div class="bg-amber-100/50 dark:bg-amber-950/40 p-3 rounded-xl text-amber-600 dark:text-amber-400 flex items-center justify-center">
+                <i class="fi fi-rr-chart-histogram text-2xl leading-none"></i>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- LISTAGEM GERENCIAL / CONTROLE DE VAGAS -->
+          <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800/60 p-5 sm:p-6 shadow-sm space-y-4">
+            
+            <div class="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800/60">
+              <h3 class="text-base font-extrabold text-slate-900 dark:text-white">Gerenciador de Vagas Ativas</h3>
+              <span class="text-xs font-semibold text-slate-400 dark:text-slate-500 bg-slate-50 dark:bg-slate-950 px-2.5 py-1 rounded-lg border border-slate-100/40">
+                {{ jobs().length }} itens
+              </span>
+            </div>
+
+            <!-- Loading inside panel -->
+            @if (isLoadingJobs() && jobs().length === 0) {
+              <div class="text-center py-10 space-y-3 flex flex-col items-center justify-center">
+                <i class="fi fi-rr-spinner animate-spin text-indigo-600 text-2xl leading-none"></i>
+                <p class="text-xs text-slate-500">Recarregando vagas...</p>
+              </div>
+            }
+
+            <!-- Empty List state inside admin panel -->
+            @else if (jobs().length === 0) {
+              <div class="text-center py-12 text-slate-500 space-y-2">
+                <!-- Flaticon Sad Icon -->
+                <i class="fi fi-rr-sad text-3xl text-slate-400 dark:text-slate-700 mx-auto block leading-none pb-1"></i>
+                <p class="text-sm font-semibold">Nenhuma vaga ativa encontrada.</p>
+                <p class="text-xs text-slate-400 max-w-xs mx-auto">Vagas deletadas ou banco de dados zerado.</p>
+              </div>
+            }
+
+            <!-- Active Jobs list / Responsive grid & Table -->
+            @else {
+              
+              <!-- 🚨 DESKTOP VIEW: Premium Table (hidden on mobile) -->
+              <div class="hidden md:block overflow-x-auto">
+                <table class="w-full text-left text-xs border-collapse">
+                  <thead>
+                    <tr class="text-slate-400 dark:text-slate-500 font-extrabold border-b border-slate-100 dark:border-slate-800/60 pb-3">
+                      <th class="py-3 px-2">ID</th>
+                      <th class="py-3 px-3">Vaga / Cargo</th>
+                      <th class="py-3 px-3">WhatsApp Contato</th>
+                      <th class="py-3 px-3">Data Cadastro</th>
+                      <th class="py-3 px-3 text-right">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-100 dark:divide-slate-800/40 text-slate-700 dark:text-slate-300 font-semibold">
+                    @for (job of jobs(); track job.id) {
+                      <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-950/20 transition-all">
+                        <td class="py-3.5 px-2 text-slate-400 font-bold">#{{ job.id }}</td>
+                        <td class="py-3.5 px-3">
+                          <span class="font-extrabold text-slate-900 dark:text-white">{{ job.title }}</span>
+                          @if (job.address) {
+                            <span class="block text-[10px] text-indigo-600 dark:text-indigo-400 mt-0.5 font-bold flex items-center gap-0.5">
+                              <i class="fi fi-rr-marker text-[10px] leading-none shrink-0"></i>
+                              {{ job.address }}
+                            </span>
+                          }
+                          <span class="block text-[10px] text-slate-400 mt-0.5 max-w-xs truncate">{{ job.description }}</span>
+                        </td>
+                        <td class="py-3.5 px-3 text-emerald-600 dark:text-emerald-400">
+                          <a [href]="getWhatsAppUrl(job.whatsapp, job.title)" target="_blank" class="hover:underline flex items-center gap-1.5 font-bold">
+                            <!-- Mini WhatsApp Icon -->
+                            <i class="fi fi-brands-whatsapp leading-none shrink-0"></i>
+                            <span>{{ job.whatsapp }}</span>
+                          </a>
+                        </td>
+                        <td class="py-3.5 px-3 text-slate-400">{{ job.createdAt | date:'dd/MM/yyyy • HH:mm' }}</td>
+                        <td class="py-3.5 px-3 text-right">
+                          <button 
+                            (click)="deleteJob(job.id)"
+                            [disabled]="isDeletingJobId() !== null"
+                            class="inline-flex items-center gap-1.5 bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/30 dark:hover:bg-rose-950/60 text-rose-600 dark:text-rose-400 font-bold px-3 py-1.5 rounded-xl border border-rose-100 dark:border-rose-900/30 hover:scale-105 transition-all text-[11px] disabled:opacity-50 cursor-pointer">
+                            @if (isDeletingJobId() === job.id) {
+                              <i class="fi fi-rr-spinner animate-spin text-rose-600 leading-none"></i>
+                              <span>Excluindo</span>
+                            } @else {
+                              <!-- Trash Icon -->
+                              <i class="fi fi-rr-trash leading-none"></i>
+                              <span>Excluir</span>
+                            }
+                          </button>
+                        </td>
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- 🚨 MOBILE VIEW: Dense Card List (hidden on desktop) -->
+              <div class="block md:hidden grid grid-cols-1 gap-4">
+                @for (job of jobs(); track job.id) {
+                  <div class="bg-slate-50 dark:bg-slate-950 p-4 rounded-2xl border border-slate-100 dark:border-slate-800/40 space-y-3">
+                    <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800/50 pb-2">
+                      <span class="text-[10px] text-slate-400 font-bold">#{{ job.id }}</span>
+                      <span class="text-[10px] text-slate-400">{{ job.createdAt | date:'dd/MM/yyyy' }}</span>
+                    </div>
+
+                    <div>
+                      <div class="flex items-center justify-between gap-2">
+                        <h4 class="text-sm font-extrabold text-slate-900 dark:text-white">{{ job.title }}</h4>
+                        @if (job.address) {
+                          <span class="text-[10px] text-indigo-600 dark:text-indigo-400 font-bold flex items-center gap-0.5 shrink-0">
+                            <i class="fi fi-rr-marker text-[10px] leading-none shrink-0"></i>
+                            {{ job.address }}
+                          </span>
+                        }
+                      </div>
+                      <p class="text-xs text-slate-400 mt-1 max-h-12 overflow-y-auto leading-relaxed">{{ job.description }}</p>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-800/50">
+                      <!-- Whatsapp icon text -->
+                      <a [href]="getWhatsAppUrl(job.whatsapp, job.title)" target="_blank" class="inline-flex items-center gap-1.5 text-xs text-emerald-600 dark:text-emerald-400 font-bold hover:underline">
+                        <i class="fi fi-brands-whatsapp leading-none shrink-0"></i>
+                        <span>{{ job.whatsapp }}</span>
+                      </a>
+
+                      <!-- Delete button -->
+                      <button 
+                        (click)="deleteJob(job.id)"
+                        [disabled]="isDeletingJobId() !== null"
+                        class="inline-flex items-center gap-1.5 bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/30 dark:hover:bg-rose-950/60 text-rose-600 dark:text-rose-400 font-extrabold px-3 py-1.5 rounded-xl border border-rose-100 dark:border-rose-900/30 text-[10px] disabled:opacity-50 cursor-pointer">
+                        @if (isDeletingJobId() === job.id) {
+                          <i class="fi fi-rr-spinner animate-spin text-rose-600 leading-none"></i>
+                          <span>Excluindo</span>
+                        } @else {
+                          <i class="fi fi-rr-trash leading-none"></i>
+                          <span>Excluir</span>
+                        }
+                      </button>
+                    </div>
+                  </div>
+                }
+              </div>
+
+            }
+
+          </div>
+        }
+
+      </section>
+    }
   </main>
 
   <!-- Footer Area -->
-  <footer class="bg-white border-t border-slate-200 py-6 mt-12">
-    <div class="max-w-4xl mx-auto px-4 text-center sm:px-6">
-      <p class="text-slate-400 text-xs">
-        Conecta Emprego Paranoá © 2026. Em conformidade com o Objetivo de Desenvolvimento Sustentável 8 da ONU.
+  <footer class="bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800/60 py-6 sm:py-8 mt-12 transition-colors duration-300">
+    <div class="max-w-4xl mx-auto px-4 text-center sm:px-6 space-y-2">
+      <p class="text-slate-400 dark:text-slate-500 text-xs font-semibold">
+        Conecta Emprego Paranoá © 2026.
       </p>
-      <p class="text-slate-400 text-[10px] mt-1">
-        Projeto focado em Inclusão Econômica, Trabalho Decente e Crescimento Econômico na Comunidade.
+      <p class="text-slate-400 dark:text-slate-600 text-[10px] leading-relaxed max-w-md mx-auto">
+        Esta iniciativa apoia ativamente a inclusão econômica, o empreendedorismo e o trabalho decente no Paranoá, em plena conformidade com o Objetivo de Desenvolvimento Sustentável 8 da ONU.
       </p>
     </div>
   </footer>

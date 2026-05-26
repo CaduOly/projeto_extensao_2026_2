@@ -18,4 +18,8 @@ export class JobService {
   createJob(job: Job): Observable<Job> {
     return this.http.post<Job>(this.apiUrl, job);
   }
+
+  deleteJob(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 }

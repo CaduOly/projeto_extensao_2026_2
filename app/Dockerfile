@@ -15,4 +15,4 @@ COPY . .
 EXPOSE 4200
 
 # Start Angular development server bound to all network interfaces
-CMD [ "npx", "ng", "serve", "--host", "0.0.0.0", "--port", "4200", "--disable-host-check" ]
+CMD [ "npx", "ng", "serve", "--host", "0.0.0.0", "--port", "4200" ]
