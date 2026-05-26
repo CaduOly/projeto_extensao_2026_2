@@ -30,6 +30,8 @@ export class App implements OnInit {
   protected readonly adminPasswordInput = signal('');
   protected readonly adminError = signal('');
   protected readonly isDeletingJobId = signal<number | null>(null);
+  protected readonly showDeleteConfirmModal = signal(false);
+  protected readonly jobIdToDelete = signal<number | null>(null);
 
   // Form input signals
   protected readonly formTitle = signal('');
@@ -251,15 +253,25 @@ export class App implements OnInit {
     this.activeTab.set('feed');
   }
 
-  deleteJob(id: number | undefined) {
+  confirmDeleteJob(id: number | undefined) {
     if (id === undefined) return;
-    if (!confirm('Tem certeza de que deseja excluir esta vaga permanentemente?')) {
-      return;
-    }
+    this.jobIdToDelete.set(id);
+    this.showDeleteConfirmModal.set(true);
+  }
+
+  cancelDeleteJob() {
+    this.showDeleteConfirmModal.set(false);
+    this.jobIdToDelete.set(null);
+  }
+
+  executeDeleteJob() {
+    const id = this.jobIdToDelete();
+    if (id === null) return;
 
     this.isDeletingJobId.set(id);
     this.errorMessage.set('');
     this.successMessage.set('');
+    this.showDeleteConfirmModal.set(false);
 
     this.jobService.deleteJob(id).subscribe({
       next: () => {
@@ -267,12 +279,14 @@ export class App implements OnInit {
         this.jobs.update(current => current.filter(j => j.id !== id));
         this.successMessage.set('Vaga excluída com sucesso!');
         this.isDeletingJobId.set(null);
+        this.jobIdToDelete.set(null);
         setTimeout(() => this.successMessage.set(''), 3000);
       },
       error: (err) => {
         console.error('Error deleting job:', err);
         this.errorMessage.set('Não foi possível excluir a vaga. Verifique a conexão com o servidor.');
         this.isDeletingJobId.set(null);
+        this.jobIdToDelete.set(null);
         setTimeout(() => this.errorMessage.set(''), 4000);
       }
     });
