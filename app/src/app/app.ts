@@ -1,6 +1,8 @@
 import { Component, OnInit, signal, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { JobService } from './services/job.service';
 import { Job } from './models/job.model';
 
@@ -12,6 +14,7 @@ import { Job } from './models/job.model';
 })
 export class App implements OnInit {
   private readonly jobService = inject(JobService);
+  private readonly router = inject(Router);
 
   // State signals
   protected readonly activeTab = signal<'feed' | 'post' | 'admin'>('feed');
@@ -65,6 +68,16 @@ export class App implements OnInit {
     this.loadJobs();
     this.checkAdminSession();
     
+    // Escuta e sincroniza as transições de URL
+    this.router.events.pipe(
+      filter((e): e is NavigationEnd => e instanceof NavigationEnd)
+    ).subscribe((event) => {
+      this.syncTabWithUrl(event.urlAfterRedirects);
+    });
+
+    // Sincroniza o estado inicial na primeira carga
+    this.syncTabWithUrl(this.router.url);
+    
     // Theme detection
     const saved = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -74,6 +87,14 @@ export class App implements OnInit {
     } else {
       this.isDarkMode.set(false);
       document.documentElement.classList.remove('dark');
+    }
+  }
+
+  private syncTabWithUrl(url: string) {
+    if (url.includes('/adm-panel')) {
+      this.activeTab.set('admin');
+    } else if (this.activeTab() === 'admin') {
+      this.activeTab.set('feed');
     }
   }
 
@@ -190,6 +211,14 @@ export class App implements OnInit {
     this.errorMessage.set('');
     this.successMessage.set('');
     this.adminError.set('');
+    
+    // Sincroniza e altera a URL do navegador
+    if (tab === 'admin') {
+      this.router.navigateByUrl('/adm-panel');
+    } else {
+      this.router.navigateByUrl('/');
+    }
+
     if (tab === 'feed' || tab === 'admin') {
       this.loadJobs();
     }
